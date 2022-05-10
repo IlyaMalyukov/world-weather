@@ -26,7 +26,7 @@ export default {
     isVisible: Boolean
   },
   data: () => ({
-    city: '',
+    city: ''
   }),
   validations: {
     city: {
@@ -42,13 +42,17 @@ export default {
       }
 
       await this.$store.dispatch('addCard', this.city)
-      
-      if (this.$store.getters.error) {
-        this.$v.city.$touch()
-        return
-      }
 
-      this.closeModal()
+      // Выяснить, почему не успевает присвоить значение в this.error
+      // и убрать setTimeout
+      setTimeout(() => {
+        if (this.error) {
+          this.$v.city.$touch()
+          return
+        }
+
+        this.closeModal()
+      }, 500)
     },
     closeModal() {
       this.clear()
@@ -68,9 +72,12 @@ export default {
   watch: {
     isVisible() {
       if (this.isVisible === false) {
-        this.$v.$reset()
-        this.city = ''
+        this.clear()
       }
+    },
+    city() {
+      this.$store.commit('clearError')
+      this.$v.$reset()
     }
   }
 }
