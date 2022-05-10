@@ -3,7 +3,6 @@ import axios from 'axios'
 const cards = {
   state: {
     cards: []
-    // ключ - process.env.API_KEY
   },
   mutations: {
     saveCards(state, card) {
