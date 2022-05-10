@@ -29,9 +29,6 @@ export default {
   data: () => ({
     isVisibleModal: false,
   }),
-  mounted() {
-    console.log(window.navigator.getCurrentPosition)
-  },
   methods: {
     showModal() {
       this.isVisibleModal = true

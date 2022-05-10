@@ -14,18 +14,21 @@
   .card__update-time {{lastUpdate}}
   .buttons
     .buttons__button(@click.prevent='remove') REMOVE
-    .buttons__button RELOAD
+    .buttons__button(@click.prevent='reload') RELOAD
 </template>
 
 <script>
 import moment from 'moment'
 
 export default {
-  name: 'CurrentLocationTime',
+  name: 'WeatherCard',
   props: {
     card: Object
   },
   methods: {
+    reload() {
+      this.$store.dispatch('updateCard', this.card.id)
+    },
     remove() {
       this.$store.dispatch('removeCard', this.card.id)
     }

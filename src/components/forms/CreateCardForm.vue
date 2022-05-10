@@ -23,11 +23,10 @@ export default {
   methods: {
     addCard() {
       this.$store.dispatch('addCard', this.city)
-      .then(() => {
-        console.log(this.$store.getters.cards)
-        this.clear()
-        this.closeModal()
-      })
+        .then(() => {
+          this.clear()
+          this.closeModal()
+        })
     },
     closeModal() {
       this.$emit('close-modal')
