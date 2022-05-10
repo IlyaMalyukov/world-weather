@@ -2,7 +2,8 @@ import axios from 'axios'
 
 const cards = {
   state: {
-    cards: []
+    cards: [],
+    error: ''
   },
   mutations: {
     saveCards(state, card) {
@@ -19,6 +20,12 @@ const cards = {
     },
     deleteCard(state, index) {
       state.cards.splice(index, 1)
+    },
+    setError(state, error) {
+      state.error = error
+    },
+    clearError(state) {
+      state.error = ''
     }
   },
   actions: {
@@ -40,6 +47,11 @@ const cards = {
           commit('updateCardData', data.data)
         }
       })
+      .catch(error => {
+        // Не получается вывести нормальное сообщение об ошибке
+        console.log(error) 
+        commit('setError', 'City not found')
+      })
     },
     updateCard({dispatch, state}, cardId) {
       const card = state.cards.find(i => i.id === cardId)
@@ -52,6 +64,7 @@ const cards = {
   },
   getters: {
     cards: (state) => state.cards,
+    error: (state) => state.error
   }
 }
 

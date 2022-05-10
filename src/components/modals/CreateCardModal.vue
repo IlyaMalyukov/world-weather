@@ -5,7 +5,9 @@ vue-final-modal(
   v-on="$listeners")
   .content-wrapper
     .content
-      CreateCardForm(@close-modal="close")
+      CreateCardForm(
+        @close-modal="close"
+        :isVisible='isVisible')
       .modal__close(@click="close") &#215;
 </template>
 
@@ -17,6 +19,11 @@ export default {
   inheritAttrs: false,
   components: {
     CreateCardForm
+  },
+  computed: {
+    isVisible() {
+      return this.$attrs.value
+    }
   }
 }
 </script>

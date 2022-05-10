@@ -2,10 +2,13 @@
 .create-card-form
   .create-card-form__title Choose a city
   .create-card-form__subtitle To find city start typing and pick one from the suggestions
-  input.create-card-form__input(
-    v-model='city'
-    placeholder='Search city'
-    @keydown.enter='addCard')
+  .input
+    input.input__field(
+      :class='{"input__field_invalid": ($v.city.$dirty && !$v.city.required || error)}'
+      v-model.trim='city'
+      placeholder='Search city'
+      @keydown.enter='addCard')
+    .input__error {{error}}
   .buttons
     .button.clear(@click.prevent='clear') CLEAR
     .buttons-group 
@@ -15,24 +18,59 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 export default {
   name: 'CreateCardForm',
+  props: {
+    isVisible: Boolean
+  },
   data: () => ({
-    city: ''
+    city: '',
   }),
+  validations: {
+    city: {
+      required
+    }
+  },
   methods: {
-    addCard() {
-      this.$store.dispatch('addCard', this.city)
-        .then(() => {
-          this.clear()
-          this.closeModal()
-        })
+    async addCard() {
+      if (this.$v.city.$invalid) {
+        this.$v.$touch()
+        this.$store.commit('setError', 'Required')
+        return
+      }
+
+      await this.$store.dispatch('addCard', this.city)
+      
+      if (this.$store.getters.error) {
+        this.$v.city.$touch()
+        return
+      }
+
+      this.closeModal()
     },
     closeModal() {
+      this.clear()
       this.$emit('close-modal')
     },
     clear() {
       this.city = ''
+      this.$store.commit('clearError')
+      this.$v.$reset()
+    }
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    isVisible() {
+      if (this.isVisible === false) {
+        this.$v.$reset()
+        this.city = ''
+      }
     }
   }
 }
@@ -58,15 +96,33 @@ export default {
     font-size: 24px;
     padding-bottom: 67px;
   }
+}
 
-  &__input {
+.input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 140px;
+
+  &__field {
     width: 100%;
     border: none;
     border-bottom: 1px solid #1b1b1b;
     outline: none;
     padding-bottom: 16px;
     font-size: 24px;
-    margin-bottom: 140px;
+
+    &_invalid {
+      border-color: red;
+    }
+  }
+
+  &__error {
+    padding-top: 10px;
+    font-size: 16px;
+    line-height: 1.2;
+    color: red;
   }
 }
 

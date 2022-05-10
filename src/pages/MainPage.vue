@@ -10,8 +10,7 @@
   .main-page__no-data(v-else) Nothing added
   .add-card-btn(@click.prevent='showModal') +
   CreateCardModal(
-  v-model="isVisibleModal" 
-  @cancel="cancel")
+    v-model="isVisibleModal")
 </template>
 
 <script>
@@ -27,19 +26,21 @@ export default {
     CreateCardModal
   },
   data: () => ({
-    isVisibleModal: false,
+    isVisibleModal: false
   }),
   methods: {
     showModal() {
       this.isVisibleModal = true
-    },
-    cancel(close) {
-      close()
     }
   },
   computed: {
     cards() {
       return this.$store.getters.cards || []
+    }
+  },
+  watch: {
+    isVisibleModal() {
+      this.$store.commit('clearError')
     }
   }
 }
