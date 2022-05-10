@@ -1,6 +1,4 @@
 import axios from 'axios'
-//import dotenv from 'dotenv'
-//dotenv.config()
 
 const cards = {
   state: {
@@ -12,6 +10,7 @@ const cards = {
       state.cards.push(card)
     },
     updateCardData(state, newData) {
+      console.log(process.env)
       let index = state.cards.findIndex(i => i.id === newData.id)
       let card = state.cards[index]
       card.weather[0].main = newData.weather[0].main
@@ -27,11 +26,11 @@ const cards = {
     addCard({commit, state}, cityName) {
       axios({
         method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/weather',
+        url: process.env.VUE_APP_API_BASE_URL,
         params: {
           units: 'metric',
           lang: 'en',
-          APPID: '557c6cd48e0aaa226bf5aef775d147dd',
+          APPID: process.env.VUE_APP_API_KEY,
           q: cityName}
         })
       .then(data => {
