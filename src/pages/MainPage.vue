@@ -2,11 +2,12 @@
 .main-page
   h1.title World Weather
   CurrentLocationCard
-  .cards
+  .cards(v-if='cards')
     WeatherCard(
       v-for='card in cards'
       :key='card.id'
       :card='card')
+  .main-page__no-data Nothing added
   .add-card-btn(@click.prevent='showModal') +
   CreateCardModal(
   v-model="isVisibleModal" 

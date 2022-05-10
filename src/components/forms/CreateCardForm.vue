@@ -1,7 +1,7 @@
 <template lang="pug">
 .create-card-form
   .create-card-form__title Choose a city
-  .create-card-form__subtitle To find city start typing and pick one from the suggestions {{city}}
+  .create-card-form__subtitle To find city start typing and pick one from the suggestions
   input.create-card-form__input(
     v-model='city'
     placeholder='Search city')
