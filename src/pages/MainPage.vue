@@ -1,13 +1,13 @@
 <template lang="pug">
 .main-page
   h1.title World Weather
-  CurrentLocationCard
-  .cards(v-if='cards')
+  //CurrentLocationCard
+  .cards(v-if='cards.length')
     WeatherCard(
       v-for='card in cards'
       :key='card.id'
       :card='card')
-  .main-page__no-data Nothing added
+  .main-page__no-data(v-else) Nothing added
   .add-card-btn(@click.prevent='showModal') +
   CreateCardModal(
   v-model="isVisibleModal" 
@@ -30,7 +30,7 @@ export default {
     isVisibleModal: false,
   }),
   mounted() {
-    console.log(this.$store.getters.cards)
+    console.log(window.navigator.getCurrentPosition)
   },
   methods: {
     showModal() {

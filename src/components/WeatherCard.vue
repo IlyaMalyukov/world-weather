@@ -12,7 +12,9 @@
     .row__title Humidity
     .row__value {{card.main.humidity}} %
   .card__update-time 0 minutes ago
-  .card__reload-btn Reload
+  .buttons
+    .buttons__button(@click.prevent='remove') REMOVE
+    .buttons__button RELOAD
 </template>
 
 <script>
@@ -21,6 +23,11 @@ export default {
   props: {
     card: Object
   },
+  methods: {
+    remove() {
+      this.$store.dispatch('removeCard', this.card.id)
+    }
+  }
 }
 </script>
 
@@ -63,8 +70,26 @@ export default {
     color: #a8a8a8;
     padding-bottom: 30px;
   }
+}
 
-  &__reload-btn {
+.row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c4c4c4;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__button {
+    font-size: 16px;
+    line-height: 1.2;
     color: #9B51E0;
     align-self: flex-end;
     cursor: pointer;
@@ -78,15 +103,4 @@ export default {
     }
   }
 }
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #c4c4c4;
-  padding-bottom: 14px;
-  margin-bottom: 16px;
-  width: 100%;
-}
-
-
 </style>

@@ -11,6 +11,9 @@ const cards = {
     saveCards(state, card) {
       state.cards.push(card)
     },
+    deleteCard(state, index) {
+      state.cards.splice(index, 1)
+    }
   },
   actions: {
     addCard({commit}, cityName) {
@@ -26,6 +29,10 @@ const cards = {
       .then(data => {
         commit('saveCards', data.data)
       })
+    },
+    removeCard({commit, state}, cardId) {
+      const index = state.cards.findIndex(i => i.id === cardId)
+      commit('deleteCard', index)
     }
   },
   getters: {
