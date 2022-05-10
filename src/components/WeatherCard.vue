@@ -11,13 +11,15 @@
   .row
     .row__title Humidity
     .row__value {{card.main.humidity}} %
-  .card__update-time 0 minutes ago
+  .card__update-time {{lastUpdate}}
   .buttons
     .buttons__button(@click.prevent='remove') REMOVE
     .buttons__button RELOAD
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'CurrentLocationTime',
   props: {
@@ -26,6 +28,11 @@ export default {
   methods: {
     remove() {
       this.$store.dispatch('removeCard', this.card.id)
+    }
+  },
+  computed: {
+    lastUpdate() {
+      return moment().startOf(this.card.dt).fromNow()
     }
   }
 }

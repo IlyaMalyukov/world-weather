@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "core-js": "^3.8.3",
     "dotenv": "^16.0.0",
+    "moment": "^2.29.3",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "pug": "^3.0.2",
