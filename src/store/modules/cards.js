@@ -14,7 +14,6 @@ const cards = {
     updateCardData(state, newData) {
       let index = state.cards.findIndex(i => i.id === newData.id)
       let card = state.cards[index]
-      console.log(newData)
       card.weather[0].main = newData.weather[0].main
       card.main.temp = newData.main.temp
       card.main.humidity = newData.main.humidity
