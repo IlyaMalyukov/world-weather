@@ -1,23 +1,37 @@
 <template lang="pug">
 .create-card-form
   .create-card-form__title Choose a city
-  .create-card-form__subtitle To find city start typing and pick one from the suggestions
+  .create-card-form__subtitle To find city start typing and pick one from the suggestions {{city}}
   input.create-card-form__input(
+    v-model='city'
     placeholder='Search city')
   .buttons
-    .button.clear CLEAR
+    .button.clear(@click.prevent='clear') CLEAR
     .buttons-group 
       .button.buttons-group__cancel(
         @click.prevent='closeModal') CANCEL
-      .button.buttons-group__add ADD
+      .button.buttons-group__add(@click.prevent='addCard') ADD
 </template>
 
 <script>
 export default {
   name: 'CreateCardForm',
+  data: () => ({
+    city: ''
+  }),
   methods: {
+    addCard() {
+      this.$store.dispatch('addCard', this.city)
+      .then(() => {
+        this.clear()
+        this.closeModal()
+      })
+    },
     closeModal() {
       this.$emit('close-modal')
+    },
+    clear() {
+      this.city = ''
     }
   }
 }

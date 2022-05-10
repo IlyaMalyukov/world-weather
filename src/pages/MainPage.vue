@@ -25,9 +25,6 @@ export default {
     WeatherCard,
     CreateCardModal
   },
-  mounted() {
-    console.log(this.weatherCards)
-  },
   data: () => ({
     isVisibleModal: false,
     cards: [

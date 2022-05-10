@@ -6,8 +6,7 @@ vue-final-modal(
   .content-wrapper
     .content
       CreateCardForm(@close-modal="close")
-      .modal__close(@click="close")
-        .icon-cross
+      .modal__close(@click="close") &#215;
 </template>
 
 <script>
@@ -22,12 +21,7 @@ export default {
 }
 </script>
 
-<style scoped>
-.icon-cross {
-  font-size: 10px;
-  color: #222;
-}
-
+<style lang="scss" scoped>
 .content-wrapper {
   position: absolute;
   margin: auto;
@@ -56,5 +50,16 @@ export default {
   right: 0;
   font-family: sans-serif;
   cursor: pointer;
+  font-size: 40px;
+  line-height: 20px;
+  color: #1b1b1b;
+
+  &:hover {
+    color: #999;
+  }
+
+  &:active {
+    color: #1b1b1b;
+  }
 }
 </style>
