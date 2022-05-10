@@ -25,17 +25,25 @@ export default {
   props: {
     card: Object
   },
+  data: () => ({
+    lastUpdate: ''
+  }),
+  mounted() {
+    this.lastUpdate = moment(this.card.created).startOf().fromNow()
+    this.updateTime()
+  },
   methods: {
-    reload() {
-      this.$store.dispatch('updateCard', this.card.id)
+    updateTime() {
+      setInterval(() => {
+        this.lastUpdate = moment(this.card.created).startOf().fromNow()
+      }, 1000)
+    },
+    async reload() {
+      await this.$store.dispatch('updateCard', this.card.id)
+      this.lastUpdate = moment(this.card.created).startOf().fromNow()
     },
     remove() {
       this.$store.dispatch('removeCard', this.card.id)
-    }
-  },
-  computed: {
-    lastUpdate() {
-      return moment().startOf(this.card.dt).fromNow()
     }
   }
 }

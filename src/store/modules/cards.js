@@ -6,6 +6,7 @@ const cards = {
   },
   mutations: {
     saveCards(state, card) {
+      card.created = new Date()
       state.cards.push(card)
     },
     updateCardData(state, newData) {
@@ -14,7 +15,7 @@ const cards = {
       card.weather[0].main = newData.weather[0].main
       card.main.temp = newData.main.temp
       card.main.humidity = newData.main.humidity
-      card.dt = newData.dt
+      card.created = new Date()
     },
     deleteCard(state, index) {
       state.cards.splice(index, 1)
