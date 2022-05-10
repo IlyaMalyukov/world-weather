@@ -100,6 +100,7 @@ export default {
   &__button {
     font-size: 16px;
     line-height: 1.2;
+    font-weight: 700;
     color: #9B51E0;
     align-self: flex-end;
     cursor: pointer;

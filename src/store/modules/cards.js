@@ -10,7 +10,6 @@ const cards = {
       state.cards.push(card)
     },
     updateCardData(state, newData) {
-      console.log(process.env)
       let index = state.cards.findIndex(i => i.id === newData.id)
       let card = state.cards[index]
       card.weather[0].main = newData.weather[0].main
