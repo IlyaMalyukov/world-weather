@@ -23,6 +23,7 @@ export default {
     addCard() {
       this.$store.dispatch('addCard', this.city)
       .then(() => {
+        console.log(this.$store.getters.cards)
         this.clear()
         this.closeModal()
       })

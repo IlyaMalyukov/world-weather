@@ -27,41 +27,10 @@ export default {
   },
   data: () => ({
     isVisibleModal: false,
-    cards: [
-      {
-        id: 0,
-        city: 'Moscow',
-        country: 'Russia',
-        weather: 'Clouds',
-        temperature: '7°С',
-        humidity: '45%'
-      },
-      {
-        id: 1,
-        city: 'Volgograd',
-        country: 'Russia',
-        weather: 'Clouds',
-        temperature: '7°С',
-        humidity: '45%'
-      },
-      {
-        id: 2,
-        city: 'Voronezh',
-        country: 'Russia',
-        weather: 'Clouds',
-        temperature: '7°С',
-        humidity: '45%'
-      },
-      {
-        id: 3,
-        city: 'Novosibirsk',
-        country: 'Russia',
-        weather: 'Clouds',
-        temperature: '7°С',
-        humidity: '45%'
-      }
-    ]
   }),
+  mounted() {
+    console.log(this.$store.getters.cards)
+  },
   methods: {
     showModal() {
       this.isVisibleModal = true
@@ -71,8 +40,8 @@ export default {
     }
   },
   computed: {
-    weatherCards() {
-      return this.$store.getters.cards
+    cards() {
+      return this.$store.getters.cards || []
     }
   }
 }

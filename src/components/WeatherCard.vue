@@ -1,17 +1,17 @@
 <template lang="pug">
 .card
-  .card__city {{card.city}}
-  .card__country {{card.country}}
+  .card__city {{card.name}}
+  .card__country {{card.sys.country}}
   .row
     .row__title Weather
-    .row__value {{card.weather}}
+    .row__value {{card.weather[0].main}}
   .row
     .row__title Tempterature
-    .row__value {{card.temperature}}
+    .row__value {{card.main.temp}} °C
   .row
     .row__title Humidity
-    .row__value {{card.humidity}}
-  .card__update-time 7 minutes ago
+    .row__value {{card.main.humidity}} %
+  .card__update-time 0 minutes ago
   .card__reload-btn Reload
 </template>
 
@@ -21,13 +21,6 @@ export default {
   props: {
     card: Object
   },
-  data: () => ({
-    rows: [
-      {id: 0, title: 'Weather', value: 'Clouds', unit: ''},
-      {id: 1, title: 'Temperature', value: 7, unit: '°С'},
-      {id: 2, title: 'Humidity', value: 45, unit: '%'},
-    ] 
-  })
 }
 </script>
 

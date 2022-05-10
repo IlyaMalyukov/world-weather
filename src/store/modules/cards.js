@@ -24,7 +24,7 @@ const cards = {
           q: cityName}
         })
       .then(data => {
-        commit('saveCards', data)
+        commit('saveCards', data.data)
       })
     }
   },
