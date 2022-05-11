@@ -67,7 +67,6 @@ export default {
         .then(data => {
           this.currentCityData = data.data
           this.currentCityData.created = new Date()
-          console.log(data)
         })
     },
     updateTime() {
