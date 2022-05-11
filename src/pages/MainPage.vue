@@ -74,7 +74,7 @@ export default {
 }
 
 .cards {
-  padding-top: 80px;
+  padding: 80px 0 40px;
   display: grid;
   justify-items: center;
   grid-gap: 40px;
