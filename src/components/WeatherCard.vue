@@ -50,6 +50,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins';
+
 .current-location-card {
   display: flex;
   flex-direction: column;
@@ -64,13 +66,20 @@ export default {
   box-shadow: 4px 4px 8px 0px #808080;
   width: 302px;
   padding: 24px;
-  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   color: #1b1b1b;
   font-size: 18px;
   line-height: 1.2;
+
+  @include desktopHd {
+    width: 260px;
+  }
+
+  @include phones-small {
+    width: 250px;
+  }
 
   &__city {
     font-size: 32px;

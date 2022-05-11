@@ -84,6 +84,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/mixins';
+
 .create-card-form {
   width: 100%;
   display: flex;
@@ -102,6 +104,7 @@ export default {
     color: #767676;
     font-size: 24px;
     padding-bottom: 67px;
+    text-align: left;
   }
 }
 
@@ -111,6 +114,14 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   padding-bottom: 140px;
+
+  @include tablets {
+    padding-bottom: 50px;
+  }
+
+  @include phones {
+    padding-bottom: 15px;
+  }
 
   &__field {
     width: 100%;

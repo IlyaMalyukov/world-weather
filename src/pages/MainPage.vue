@@ -47,24 +47,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins';
+
 .main-page {
   padding: 0 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
+  @include desktopHd {
+    padding: 0 100px;
+  }
+
+  @include desktop {
+    padding: 0 100px;
+  }
+
+  @include tablets {
+    padding: 0 50px;
+  }
+
+  @include phones {
+    padding: 0 15px;
+  }
 }
 
 .cards {
   padding-top: 80px;
-  display: flex;
-  flex-wrap: wrap;
-}
+  display: grid;
+  justify-items: center;
+  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 
-.card {
-  margin-right: 40px;
+  @include desktopHd {
+    grid-gap: 20px;
+  }
 
-  &:nth-child(4) {
-    margin-right: 0;
+  @include desktop {
+    padding-top: 40px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @include tablets {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include phones {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -82,6 +112,14 @@ export default {
   height: 56px;
   font-size: 48px;
   cursor: pointer;
+
+  @include phones {
+    right: 15px;
+    bottom: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 36px;
+  }
 
   &:hover {
     background: #ccf;

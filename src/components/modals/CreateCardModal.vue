@@ -29,6 +29,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/mixins';
+
 .content-wrapper {
   position: absolute;
   margin: auto;
@@ -41,6 +43,16 @@ export default {
   height: max-content;
   border-radius: 4px;
   padding: 24px;
+
+  @include tablets {
+    width: auto;
+    margin: auto 20px;
+  }
+
+  @include phones {
+    height: 100%;
+    margin: 0;
+  }
 }
 
 .content {
@@ -53,13 +65,17 @@ export default {
 
 .modal__close {
   position: absolute;
-  top: 0;
+  top: 0px;
   right: 0;
   font-family: sans-serif;
   cursor: pointer;
   font-size: 40px;
   line-height: 20px;
   color: #1b1b1b;
+
+  @include phones {
+    top: 10px;
+  }
 
   &:hover {
     color: #999;
