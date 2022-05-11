@@ -1,7 +1,7 @@
 <template lang="pug">
 .main-page
   h1.title World Weather
-  //CurrentLocationCard
+  CurrentLocationCard
   .cards(v-if='cards.length')
     WeatherCard(
       v-for='card in cards'

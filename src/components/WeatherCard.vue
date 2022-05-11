@@ -6,7 +6,7 @@
     .row__title Weather
     .row__value {{card.weather[0].main}}
   .row
-    .row__title Tempterature
+    .row__title Temperature
     .row__value {{card.main.temp}} °C
   .row
     .row__title Humidity

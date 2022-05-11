@@ -1,26 +1,94 @@
 <template lang="pug">
-.current-location-card
+.current-location-card(v-if='currentCityData')
   .title Watch weather in your current location
   .card
-    .card__title Moscow, RU
+    .card__title {{currentCityData.name}}, {{country}}
     .card__subtitle Your current location
-    .row(v-for='row in rows')
-      .row__title {{row.title}}
-      .row__value {{row.value}} {{row.unit}}
-    .card__update-time 7 minutes ago
-    .card__reload-btn Reload
+    .row
+      .row__title Weather
+      .row__value {{weather}}
+    .row
+      .row__title Temperature
+      .row__value {{temperature}} °C
+    .row
+      .row__title Humidity
+      .row__value {{humidity}} %
+    .card__update-time {{lastUpdate}}
+    .card__reload-btn(@click.prevent='reload') Reload
 </template>
 
 <script>
+import axios from 'axios'
+import moment from 'moment'
+
 export default {
   name: 'CurrentLocationTime',
   data: () => ({
-    rows: [
-      {id: 0, title: 'Weather', value: 'Clouds', unit: ''},
-      {id: 1, title: 'Temperature', value: 7, unit: '°С'},
-      {id: 2, title: 'Humidity', value: 45, unit: '%'},
-    ] 
+    currentCityData: {},
+    lastUpdate: ''
   }),
+  async mounted() {
+    await this.findGeoLocation()
+    this.lastUpdate = moment(this.currentCityData?.created).startOf().fromNow()
+    this.updateTime()
+  },
+  methods: {
+    reload() {
+      this.findGeoLocation()
+    },
+    findGeoLocation() {
+      const location = window.navigator.geolocation
+      const showLocation = (position) => {
+        this.getWeatherData(position)
+      }
+
+      const errorHandler = (error) => {
+        console.log(error)
+      }
+
+      location.getCurrentPosition(showLocation, errorHandler)
+    },
+    async getWeatherData(position) {
+      const lat = position.coords.latitude 
+      const lon = position.coords.longitude
+      await axios({
+        method: 'GET',
+        url: process.env.VUE_APP_API_BASE_URL,
+        params: {
+          units: 'metric',
+          lang: 'en',
+          APPID: process.env.VUE_APP_API_KEY,
+          lat: lat,
+          lon: lon}
+        })
+        .then(data => {
+          this.currentCityData = data.data
+          this.currentCityData.created = new Date()
+          console.log(data)
+        })
+    },
+    updateTime() {
+      setInterval(() => {
+        this.lastUpdate = moment(this.currentCityData.created).startOf().fromNow()
+      }, 1000)
+    },
+  },
+  computed: {
+    country() {
+      return this.currentCityData?.sys?.country
+    },
+    weather() {
+      const weatherData = this.currentCityData?.weather
+      let data = weatherData?.find(item => item)
+      return data?.main
+    },
+    temperature() {
+      return this.currentCityData?.main?.temp
+    },
+    humidity() {
+      return this.currentCityData?.main?.humidity
+    }
+  }
 }
 </script>
 
