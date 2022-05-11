@@ -2,7 +2,8 @@
 .current-location-card(v-if='currentCityData')
   .title Watch weather in your current location
   .card
-    .card__title {{currentCityData.name}}, {{country}}
+    .card__title(v-if='currentCityData.name') 
+      span {{currentCityData.name}}, {{country}}
     .card__subtitle Your current location
     .row
       .row__title Weather
