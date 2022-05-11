@@ -93,6 +93,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins';
+
 .current-location-card {
   display: flex;
   flex-direction: column;
@@ -113,6 +115,18 @@ export default {
   color: #1b1b1b;
   font-size: 18px;
   line-height: 1.2;
+
+  @include desktop {
+    min-width: 590px;
+  }
+
+  @include phones {
+    min-width: 350px;
+  }
+
+  @include phones-small {
+    min-width: 250px;
+  }
 
   &__title {
     font-size: 32px;
