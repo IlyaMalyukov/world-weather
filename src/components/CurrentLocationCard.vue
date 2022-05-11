@@ -15,6 +15,8 @@
       .row__value {{humidity}} %
     .card__update-time {{lastUpdate}}
     .card__reload-btn(@click.prevent='reload') Reload
+.current-location-card(v-else)
+  .title Your location has not been determined
 </template>
 
 <script>
