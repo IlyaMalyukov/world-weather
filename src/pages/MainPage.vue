@@ -71,6 +71,10 @@ export default {
   @include phones {
     padding: 0 15px;
   }
+
+  &__no-data {
+    margin-top: 25px;
+  }
 }
 
 .cards {

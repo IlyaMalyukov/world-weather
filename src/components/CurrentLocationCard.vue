@@ -1,5 +1,5 @@
 <template lang="pug">
-.current-location-card(v-if='currentCityData')
+.current-location-card(v-if='Object.keys(currentCityData).length !== 0')
   .title Watch weather in your current location
   .card
     .card__title(v-if='currentCityData.name') 
